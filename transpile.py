@@ -1,8 +1,13 @@
 import os, sys, getopt, subprocess, json
 
-def transpile(file, language, output_file):
-    language = language.lower()
-    if language not in ["golang", "go", "javascript", "typescript", "java", "kotlin", "python"]:
+def normalize_language(language):
+    if language == "golang" or language == "go":
+        return "golang"
+    return language
+
+def transpile(file, language):
+    language = normalize_language(language.lower())
+    if language not in ["golang", "javascript", "typescript", "java", "kotlin", "python"]:
         raise ValueError("Unsupported language: {}".format(language))
 
     ai_guide = "Use CLAUDE.md as general guide for your response."
@@ -12,6 +17,18 @@ def transpile(file, language, output_file):
         ai_input,
     ]
     output = subprocess.check_output(args)
+
+    extension_map = {
+        "golang": "go",
+        "javascript": "js",
+        "typescript": "ts",
+        "java": "java",
+        "kotlin": "kt",
+    }
+    extension = extension_map[language]
+
+    last_dot = file.rfind(".")
+    output_file = ".gen/{}/{}.{}".format(language, file[:last_dot], extension)
 
     # make output_file directory if it doesn't exist
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
@@ -24,7 +41,7 @@ def transpile(file, language, output_file):
 def main(argv):
     options = ["file=", "lang=", "output="]
     try:
-      opts, args = getopt.getopt(argv,"f:l:o:",options)
+      opts, args = getopt.getopt(argv,"f:l:",options)
     except getopt.GetoptError:
       print('options error')
       sys.exit(2)
@@ -34,17 +51,14 @@ def main(argv):
 
     file = None
     language = None
-    output = None
     for opt, arg in opts:
       print ("opt: {}, arg: {}".format(opt, arg))
       if opt in ("-l", "--lang"):
          language = arg
       elif opt in ("-f", "--file"):
          file = arg
-      elif opt in ("-o", "--output"):
-         output = arg
 
-    transpile(file, language, output)
+    transpile(file, language)
 
 if __name__ == "__main__":
    main(sys.argv[1:])

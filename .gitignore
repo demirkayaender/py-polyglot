@@ -1,0 +1,8 @@
+# Untracked files:
+.gen/
+
+# Ignore all files in the .gen directory
+.gen/*
+
+# Ignore all files in the .gen directory
+.gen/*
