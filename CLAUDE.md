@@ -12,5 +12,32 @@ Hints are provided with "type" keyword. Example:
 ```
 
 Defaults:
-Numbers: default: integer. Allowed: long, double, float
-Fractional numbers: default: double. Allowed: float
+
+### Primitive Types
+
+{
+    "Numbers": {
+        default: integer
+        allowed: [long, double, float]
+    },
+    "Fractional Number": {
+        default: double,
+        allowed: [float]
+    }
+}
+
+### Collections
+
+{
+    Lists: {
+        default: array,
+        restrictions: ["All elements should be same type"]
+    },
+    Maps: {
+        default: map,
+        restrictions: [
+            "All values should be the same type",
+            "All keys should be the same type",
+        ]
+    }
+}
