@@ -18,6 +18,11 @@ def transpile(file, language):
     ]
     output = subprocess.check_output(args)
 
+    if output[:5].lower() == b'error':
+        print(output)
+        raise Exception(output)
+        return
+
     extension_map = {
         "golang": "go",
         "javascript": "js",

@@ -4,10 +4,15 @@ Only output the result without any explanation
 Remove any wrapping such as ``` around the output
 
 Use GENHINT for transpiling hints
+When a restriction fails,
+
+- ignore the entire output
+- return an error starting with "ERROR: " and printing the failing line along with file path and line number
 
 ## Data Types
+
 Hints are provided with "type" keyword. Example:
-```python
+```Python
 # GENHINT type: long
 ```
 
