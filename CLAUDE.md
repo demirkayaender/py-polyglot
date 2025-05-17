@@ -4,10 +4,10 @@ Only output the result without any explanation
 Remove any wrapping such as ``` around the output
 
 Use GENHINT for transpiling hints
-When a restriction fails,
-
-- ignore the entire output
-- return an error starting with "ERROR: " and printing the failing line along with file path and line number
+When a restriction fails, ignore all other content and respond exclusively with the following error structure:
+ERROR: 
+reason for failure
+failing line, file path:line number
 
 ## Data Types
 
