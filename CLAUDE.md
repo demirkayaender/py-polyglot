@@ -1,13 +1,12 @@
 # Instructions
 
-Only output the result without any explanation
-Remove any wrapping such as ``` around the output
+Types of output:
 
+- ERROR: When a restriction fails, ignore all other content and respond exclusively with the following error structure: "ERROR: reason for failure, failing line, file path:line number
+- Code: Only output the result without any explanation. Remove any wrapping such as ``` around the output
+
+Ambiguous code:
 Use GENHINT for transpiling hints
-When a restriction fails, ignore all other content and respond exclusively with the following error structure:
-ERROR: 
-reason for failure
-failing line, file path:line number
 
 ## Data Types
 
