@@ -1,9 +1,7 @@
 # Instructions
 
-Types of output:
-
-- ERROR: When a restriction fails, ignore all other content and respond exclusively with the following error structure: "ERROR: reason for failure, failing line, file path:line number
-- Code: Only output the result without any explanation. Remove any wrapping such as ``` around the output
+- Only output the result without any explanation. Remove any wrapping such as ``` around the output
+- When a restriction fails, put an error in the beginning of your output with the following error structure: "ERROR: reason for failure, failing line, file path:line number
 
 Ambiguous code:
 Use GENHINT for transpiling hints
