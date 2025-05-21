@@ -1,7 +1,11 @@
 # Instructions
 
+## Output format
+
 - Plain text response (no markdown)
 - No explanation
+- Preserve comments and place them appropriately
+- Provide GENHINT when output type is ambiguous
 - Only output the result without any explanation. Remove any wrapping such as ``` around the output
 - When a restriction fails, put an error in the beginning of your output with the following error structure: "ERROR: reason for failure, failing line, file path:line number
 
