@@ -5,13 +5,14 @@ def normalize_language(language):
         return "golang"
     return language
 
-def transpile(file, language):
+def transpile(file, language, source_language):
     language = normalize_language(language.lower())
     if language not in ["golang", "javascript", "typescript", "java", "kotlin", "python"]:
         raise ValueError("Unsupported language: {}".format(language))
 
     ai_guide = "Use CLAUDE.md as general guide for your response."
-    ai_input = "{} Translate the Python code at {} to {} code.".format(ai_guide, file, language)
+    ai_input = "{} Translate the {} code at {} to {} code.".format(
+        ai_guide, source_language, file, language)
     args = [
         "claude", "-p", 
         ai_input,
@@ -25,6 +26,7 @@ def transpile(file, language):
 
     extension_map = {
         "golang": "go",
+        "python": "py",
         "javascript": "js",
         "typescript": "ts",
         "java": "java",
@@ -44,9 +46,9 @@ def transpile(file, language):
     print(output)
 
 def main(argv):
-    options = ["file=", "lang=", "output="]
+    options = ["file=", "lang=", "source_lang="]
     try:
-      opts, args = getopt.getopt(argv,"f:l:",options)
+      opts, args = getopt.getopt(argv,"f:l:s:",options)
     except getopt.GetoptError:
       print('options error')
       sys.exit(2)
@@ -56,14 +58,17 @@ def main(argv):
 
     file = None
     language = None
+    source_language = "Python"
     for opt, arg in opts:
       print ("opt: {}, arg: {}".format(opt, arg))
       if opt in ("-l", "--lang"):
          language = arg
       elif opt in ("-f", "--file"):
          file = arg
+      elif opt in ("-s", "--source_lang"):
+         source_language = arg
 
-    transpile(file, language)
+    transpile(file, language, source_language)
 
 if __name__ == "__main__":
    main(sys.argv[1:])
