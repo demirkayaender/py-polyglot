@@ -43,6 +43,7 @@ The transpiler supports the following languages:
 - Only output the result without any explanation. Remove any wrapping such as ``` around the output
 - When a restriction fails, put an error in the beginning of your output with the following error structure: "ERROR: reason for failure, failing line, file path:line number
 - In Golang, public functions can be directly called within package. When the source language is Golang, dependent files should exist in the same target folder, and import them as necessary. Don't rewrite the definitions.
+- Make sure method names match to the ones from the imported modules
 
 ## Data Types
 

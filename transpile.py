@@ -72,11 +72,13 @@ def extract_code(output):
     if m is None: 
         return output
 
-    code = m.group(3)
+    print("Other output: ")
+    CODE_GROUP_INDEX = 3
+    code = m.group(CODE_GROUP_INDEX)
     for i, group in enumerate(m.groups()):
-        print("######### GROUP {} #########".format(i))
-        print(group)
-        print("#############################")
+        if False and i == CODE_GROUP_INDEX:
+            continue
+        print("group {}: {}".format(i, group))
     return code
 
 def main(argv):
