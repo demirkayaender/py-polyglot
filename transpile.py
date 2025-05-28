@@ -70,16 +70,31 @@ def extract_code(output):
     # Return the code using regex
     m = re.search('((?s:.)*?)```(.*)?\n((?s:.)*?)```(?s:.)*?', output)
     if m is None: 
+        print("No explanation found in output")
+        error = extract_error(output)
+        if error is not None:
+            raise Exception(error)
         return output
 
     print("Other output: ")
     CODE_GROUP_INDEX = 3
     code = m.group(CODE_GROUP_INDEX)
     for i, group in enumerate(m.groups()):
-        if False and i == CODE_GROUP_INDEX:
+        # group method is 1-indexed but groups is 0-indexed
+        if i == (CODE_GROUP_INDEX-1):
             continue
         print("group {}: {}".format(i, group))
     return code
+
+
+def extract_error(output):
+    # Given an agent output in the form of 
+    # Explanation```language?code```more explanation
+    # Return the code using regex
+    m = re.search('##ERROR##: (.*, .*, .*)', output)
+    if m is None:
+        return None
+    return m.group(1)
 
 def main(argv):
     options = ["file=", "lang=", "source_lang="]

@@ -1,0 +1,12 @@
+{
+    "golang": {
+        "github.com/marusama/semaphore/v2": {
+            "description": "A fast, simple, and modern semaphore implementation for Go",
+            "replacements": {
+                "python": {
+                    "name": "threading.Semaphore"
+                }
+            }
+        }
+    }
+}
