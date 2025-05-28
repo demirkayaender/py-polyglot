@@ -10,7 +10,7 @@
 - Provide GENHINT when output type is ambiguous
 - Only output the result without any explanation. Remove any wrapping such as ``` around the output
 - Make sure method names match to the ones from the imported modules
-- Find appropriate replacement libraries for imported libraries. Use libraries.json as to get replacement ideas. If you cannot find one, return an output mentioning the replacement wasn't found.
+- Find appropriate replacement libraries for imported libraries. Use LIBHINT comments. For example a comment above a library could look like "LIBHINT python: threading.Semaphore"
 
 Ambiguous code:
 Use GENHINT for transpiling hints

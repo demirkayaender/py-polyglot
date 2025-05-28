@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"sync"
 
+	// LIBHINT python: threading.Semaphore
 	"github.com/marusama/semaphore/v2"
 )
 
