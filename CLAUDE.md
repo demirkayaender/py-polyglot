@@ -11,6 +11,7 @@
 - Only output the result without any explanation. Remove any wrapping such as ``` around the output
 - Make sure method names match to the ones from the imported modules
 - Find appropriate replacement libraries for imported libraries. Use LIBHINT comments. For example a comment above a library could look like "LIBHINT python: threading.Semaphore"
+- Add a comment in the beginning of the code block saying "GENERATION START", and finish the code block with a comment saying "GENERATION END".
 
 Ambiguous code:
 Use GENHINT for transpiling hints

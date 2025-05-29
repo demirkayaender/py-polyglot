@@ -57,6 +57,7 @@ def test_extract_code(source, language):
     last_dot = source.rfind(".")
     output_file = ".gen/{}/{}.{}".format(language, source[:last_dot], extension)
     input = ""
+    print("output_file: {}".format(output_file))
     with open(output_file, "r") as f:
         input = f.read()
     with open(output_file, "w") as f:
@@ -65,10 +66,9 @@ def test_extract_code(source, language):
 
 
 def extract_code(output):
-    # Given an agent output in the form of 
-    # Explanation```language?code```more explanation
-    # Return the code using regex
-    m = re.search('((?s:.)*?)```(.*)?\n((?s:.)*?)```(?s:.)*?', output)
+    # Return everything between GENERATION START and # GENERATION END
+
+    m = re.search('((?s:.)*?)GENERATION START(.*)?\n((?s:.)*?)\n.*GENERATION END', output)
     if m is None: 
         print("No explanation found in output")
         error = extract_error(output)
@@ -121,5 +121,6 @@ def main(argv):
 
     transpile(file, language, source_language)
     # test_extract_code(file, language)
+
 if __name__ == "__main__":
    main(sys.argv[1:])

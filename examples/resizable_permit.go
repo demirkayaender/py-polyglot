@@ -40,6 +40,7 @@ func NewResizablePermit(initCount int) Permit {
 
 // Acquire is blocking until a permit is acquired or returns error after context is done
 // Remember to call Release(count) to release the permit after usage
+// Count is increased by 1 after successful acquire
 func (p *resizablePermit) Acquire(ctx context.Context) error {
 	if err := p.sem.Acquire(ctx, 1); err != nil {
 		return fmt.Errorf("failed to acquire permit before context is done: %w", err)
@@ -47,7 +48,7 @@ func (p *resizablePermit) Acquire(ctx context.Context) error {
 	return nil
 }
 
-// Release release one permit
+// Release release one permit, count reduced by 1 per release
 func (p *resizablePermit) Release() {
 	p.sem.Release(1)
 }
